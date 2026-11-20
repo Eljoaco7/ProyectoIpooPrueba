@@ -1,3 +1,4 @@
+package Pruebita;
 public class MatrizColor {
     
     //Atributos de instancia

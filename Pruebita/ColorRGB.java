@@ -1,3 +1,4 @@
+package Pruebita;
 
 public class ColorRGB{   
     //Atributos de instancia
