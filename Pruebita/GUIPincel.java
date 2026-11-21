@@ -56,15 +56,63 @@ public class GUIPincel extends JFrame{
         setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
 
-    //Comentario Prueba
-
-
     private void inicializarPanelMatriz(){
 
     }
+
+    // Construye e inicializa el menú inferior dividiéndolo en 3 subpaneles:
     
     private void inicializarPanelMenu(){
+        
+        //1. Panel contenedor del menú
 
+        panelMenu = new JPanel();
+        panelMenu.setLayout(new BorderLayout());
+
+        //2. Entradas númericas para componentes RGB (OESTE)
+
+        panelColores = new JPanel();
+        panelColores.setLayout(new GridLayout(3,2,5,5));
+
+        etiquetaRojo = new JLabel("Rojo:");
+        rojo = new JTextField("0");
+        etiquetaVerde = new JLabel("Verde:");
+        verde = new JTextField("0");
+        etiquetaAzul = new JLabel("Azul:");
+        azul = new JTextField("0");
+
+        panelColores.add(etiquetaRojo);
+        panelColores.add(rojo);
+        panelColores.add(etiquetaVerde);
+        panelColores.add(verde);
+        panelColores.add(etiquetaAzul);
+        panelColores.add(azul);
+
+        //3. Visor gráfico del color activo del pincel (CENTRO)
+
+        panelContainerControlColor = new JPanel();
+        panelControlColor = new JPanel();
+        panelControlColor.setPreferredSize(new Dimension(35,35));
+        panelControlColor.setBackground(Color.BLACK);
+
+        panelContainerControlColor.add(panelControlColor);
+        
+        //4. Componentes reactivas y registración de oyentes (SUR)
+
+        panelContainerBoton = new JPanel();
+        boton = new JButton("Confirmar Color");
+        boton.addActionListener(new OyenteBotonPincel());
+        consultar = new JCheckBoz("Ver RGB");
+        consultar.addActionListener(new OyenteBotonCheckBox());
+
+        panelContainerBoton.add(boton);
+        panelContainerBoton.add(consultar);
+
+        //5. Se insertan los subpaneles en el contenedor principal
+        
+        panelMenu.add(panelColores, BorderLayout.WEST);
+        panelMenu.add(panelContainerControlColor, BorderLayout.CENTER);
+        panelMenu.add(panelContainerBoton, BorderLayout.SOUTH);
     }
     
     // Prueba
