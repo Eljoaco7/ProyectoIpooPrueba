@@ -56,7 +56,9 @@ public class GUIPincel extends JFrame{
         setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
 
-    
+    //Comentario Prueba
+
+
     private void inicializarPanelMatriz(){
 
     }
