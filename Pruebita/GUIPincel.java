@@ -65,6 +65,7 @@ public class GUIPincel extends JFrame{
 
     }
     
+    // Prueba
     
     private class OyenteMatriz implements ActionListener{
         public void actionPerformed(ActionEvent e){
