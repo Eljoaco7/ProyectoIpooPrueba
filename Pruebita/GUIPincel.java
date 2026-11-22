@@ -164,7 +164,26 @@ public class GUIPincel extends JFrame{
     
     private class OyenteBotonCheckBox implements ActionListener{
         public void actionPerformed(ActionEvent e){
-            
+            int filas = matriz.cantFilas();
+            int columnas = matriz.cantColumnas();
+
+            //Si la casilla es seleccionada, se deshabilitan los botones de la matriz y se muestra el RGB de cada color
+            //Sino, se habilitan los botones y se limpia el texto de cada casilla
+
+            if(consultar.isSelected()){
+                for(int f = 0; f<filas;f++)
+                    for(int c =0; c<columnas;c++){
+                        botonMatriz[f][c].setEnabled(false);
+                        botonMatriz[f][c].setText(matriz.obtenerColor(f, c).toString());
+                }
+            }
+            else {
+                for(int f=0; f<filas;f++)
+                    for(int c = 0; c<columnas;c++){
+                        botonMatriz[f][c].setEnabled(true);
+                        botonMatriz[f][c].setText("");
+                }
+            }
         }
     } 
 }
