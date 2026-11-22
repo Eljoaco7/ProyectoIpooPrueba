@@ -57,7 +57,40 @@ public class GUIPincel extends JFrame{
     }
 
     private void inicializarPanelMatriz(){
+        
+        // Panel de la matriz y su layout
 
+        int filas = matriz.cantFilas();
+        int columnas = matriz.cantColumnas();
+
+        
+        panelMatriz = new JPanel();
+        panelMatriz.setLayout(new GridLayout(filas,columnas));
+        panelMatriz.setBorder(BorderFactory.createEmptyBorder(80, 15, 15, 15));
+        panelMatriz.setPreferredSize(new Dimension(600, 400));
+        
+
+        // Creacion de la matriz
+
+        botonMatriz = new JButton[filas][columnas];
+        
+        for(int i = 0; i < filas; i++){
+            for(int j = 0; j < columnas; j++){
+                botonMatriz[i][j] = new JButton();
+                botonMatriz[i][j].setBackground(Color.WHITE);
+                botonMatriz[i][j].setEnabled(true);
+               
+               
+                /*Aca iria el oyenteMatriz*/
+
+                OyenteMatriz oyenteM = new OyenteMatriz();
+                botonMatriz[i][j].addActionListener(oyenteM);
+
+               // Añado
+               
+                panelMatriz.add(botonMatriz[i][j]);
+            }
+        }
     }
 
     // Construye e inicializa el menú inferior dividiéndolo en 3 subpaneles:
@@ -102,7 +135,7 @@ public class GUIPincel extends JFrame{
         panelContainerBoton = new JPanel();
         boton = new JButton("Confirmar Color");
         boton.addActionListener(new OyenteBotonPincel());
-        consultar = new JCheckBoz("Ver RGB");
+        consultar = new JCheckBox("Ver RGB");
         consultar.addActionListener(new OyenteBotonCheckBox());
 
         panelContainerBoton.add(boton);
