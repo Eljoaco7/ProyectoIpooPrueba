@@ -73,7 +73,7 @@ public class GUIPincel extends JFrame{
         // Creacion de la matriz
 
         botonMatriz = new JButton[filas][columnas];
-        
+        OyenteMatriz oyenteM = new OyenteMatriz();
         for(int i = 0; i < filas; i++){
             for(int j = 0; j < columnas; j++){
                 botonMatriz[i][j] = new JButton();
@@ -81,9 +81,9 @@ public class GUIPincel extends JFrame{
                 botonMatriz[i][j].setEnabled(true);
                
                
-                /*Aca iria el oyenteMatriz*/
+                
 
-                OyenteMatriz oyenteM = new OyenteMatriz();
+                
                 botonMatriz[i][j].addActionListener(oyenteM);
 
                // Añado
@@ -152,6 +152,39 @@ public class GUIPincel extends JFrame{
     
     private class OyenteMatriz implements ActionListener{
         public void actionPerformed(ActionEvent e){
+            
+            // e.getSource() me devuelve el componente que disparó el evento (el botón que se tocó)
+            // pero como es un Object genérico. Lo casteo a JButton para poder usarlo como botón
+            // getSource() devuelve Object; sé que es un JButton porque solo registré este oyente en la grilla en inicializarPanelMatriz
+            
+            JButton botonPresionado = (JButton) e.getSource();
+
+            // Leo los tres números del color actual del pincel
+
+            // Después los uso para armar dos objetos distintos:
+            //  new Color(r,v,a) hace el Color de Java, para pintar el botón
+            //  new ColorRGB(r,v,a) guarda el color para la matriz
+
+            int r = nuevoColor.obtenerRojo();
+            int v = nuevoColor.obtenerVerde();
+            int a = nuevoColor.obtenerAzul();
+
+            // Pintar el boton (Visualmente funciona)
+
+            botonPresionado.setBackground(new Color(r,v,a));
+
+            // Busco su posicion y guardo en "matriz" para que Ver RGB diga bien el color
+
+            boolean encontre = false;
+
+            for(int i = 0; i < matriz.cantFilas() && !encontre; i++){
+                for(int j = 0; j < matriz.cantColumnas() && !encontre; j++){
+                    if(botonMatriz[i][j] == botonPresionado){
+                        matriz.establecerColor(i, j, new ColorRGB(r, v, a));
+                        encontre = true;
+                    }
+                }
+            }
 
         }
     }
