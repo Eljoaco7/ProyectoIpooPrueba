@@ -192,7 +192,42 @@ public class GUIPincel extends JFrame{
     private class OyenteBotonPincel implements ActionListener{
         public void actionPerformed(ActionEvent e){
 
+            //Recupera el texto de los campos de texto de las etiquetas de color
+
+            String textoRojo = rojo.getText();
+            String textoVerde = verde.getText(); 
+            String textoAzul = azul.getText();
+
+            //Si son digitos, los convierte de String a int, sino envia el mensaje de error
+
+            if(textoRojo.matches("\\d{1,9}") && textoVerde.matches("\\d{1,9}") && textoAzul.matches("\\d{1,9}")){
+                int r = Integer.parseInt(textoRojo);
+                int v = Integer.parseInt(textoVerde);
+                int a = Integer.parseInt(textoAzul);
+
+                //Si los valores ingresados entran en el rango valido, se guarda el color y se actualiza el visor
+                //Sino, se envia el mensaje de error
+
+                if(r>=0 && r<=255 && v>=0 && v<=255 && a>=0 && a<=255){
+                    nuevoColor = new ColorRGB(r,v,a);
+                    panelControlColor.setBackground(new Color(r,v,a));
+                } else {
+                    mostrarError();
+                }
+            } else{
+                mostrarError();
+            }
+
         }
+        
+        //Metodo auxiliar que envia el mensaje de error y restaura los valores de los campos de texto
+        private void mostrarError(){
+            JOptionPane.showMessageDialog(GUIPincel.this, "Ingrese valores válidos", "Error", JOptionPane.ERROR_MESSAGE); 
+
+            rojo.setText(String.valueOf(nuevoColor.obtenerRojo())); 
+            verde.setText(String.valueOf(nuevoColor.obtenerVerde())); 
+            azul.setText(String.valueOf(nuevoColor.obtenerAzul()));
+        }    
     }
     
     private class OyenteBotonCheckBox implements ActionListener{
